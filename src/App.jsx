@@ -3,6 +3,7 @@ import { ThemeContext } from './context/ThemeContext'
 import { useDarkMode } from './hooks/useDarkMode'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import BackToTop from './components/BackToTop'
 import Home from './pages/Home'
 import Sobre from './pages/Sobre'
 import Servicos from './pages/Servicos'
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/contato" element={<Contato />} />
           </Routes>
           <Footer />
+          <BackToTop />
         </div>
       </BrowserRouter>
     </ThemeContext.Provider>

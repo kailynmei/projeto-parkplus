@@ -1,9 +1,10 @@
 export const empresa = {
   nome: 'Park Plus Estacionamentos',
   fundacao: 1998,
-  email: 'contato@parkplus.com.br',
-  telefones: ['+55 (11) 3805-0300', '+55 (11) 95057-7200'],
+  email: 'administrativo@parkplusestacionamentos.com.br',
+  telefones: ['+55 (11) 3858-4910', '+55 (11) 95057-7200'],
   endereco: 'Alameda Olga, nº 422, Cjs. 137/138 – Barra Funda, São Paulo – SP',
+  enderecoLabel: 'Escritório Central',
   redesSociais: {
     instagram: '',
     facebook: '',

@@ -37,13 +37,18 @@ export default function Footer() {
         <div>
           <p className="font-bold text-xs uppercase tracking-widest text-white/40 mb-4">Contato</p>
           <ul className="flex flex-col gap-3 text-sm text-white/60">
-            <li className="leading-relaxed">{empresa.endereco}</li>
+            <li className="leading-relaxed">
+              <span className="block text-white/40 text-xs uppercase tracking-wide mb-1">
+                {empresa.enderecoLabel}
+              </span>
+              {empresa.endereco}
+            </li>
             {empresa.telefones.map((tel) => (
               <li key={tel}>
                 <a href={`tel:${tel}`} className="hover:text-brand-cyan transition-colors">{tel}</a>
               </li>
             ))}
-            <li>
+            <li className="break-words">
               <a href={`mailto:${empresa.email}`} className="hover:text-brand-cyan transition-colors">
                 {empresa.email}
               </a>
