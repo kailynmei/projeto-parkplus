@@ -29,7 +29,7 @@ export default function Unidades() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl md:text-5xl font-black mb-4"
         >
-          Nossas Unidades
+          Nossas unidades
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}

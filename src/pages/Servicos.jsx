@@ -1,36 +1,39 @@
-import { servicos } from '../data/conteudo'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { servicos } from '../data/conteudo'
 
 export default function Servicos() {
   return (
-    <main className="py-20 px-4">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-brand-navy mb-4">Nossos Serviços</h1>
-          <p className="text-gray-600 max-w-xl mx-auto">
-            Oferecemos soluções completas de gestão de estacionamentos para diferentes
-            segmentos e necessidades.
-          </p>
-        </div>
+    <main className="pt-20">
+      <section className="bg-brand-navy py-20 px-6 text-center text-white">
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+          className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-3">
+          O que oferecemos
+        </motion.p>
+        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-4xl md:text-5xl font-black">
+          Nossos serviços
+        </motion.h1>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {servicos.map((servico) => (
-            <div key={servico.id} className="bg-white border rounded-2xl p-8 hover:shadow-lg transition-shadow">
-              <h2 className="text-xl font-bold text-brand-navy mb-3">{servico.titulo}</h2>
-              <p className="text-gray-600 text-sm leading-relaxed">{servico.descricao}</p>
-            </div>
-          ))}
+      <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {servicos.map((s) => (
+              <div key={s.id} className="border-t-4 border-brand-cyan bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <h2 className="text-xl font-bold text-brand-navy dark:text-white mb-3">{s.titulo}</h2>
+                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{s.descricao}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link to="/contato"
+              className="bg-brand-cyan text-brand-navy font-bold px-8 py-3.5 rounded-full hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide">
+              Solicitar Orçamento
+            </Link>
+          </div>
         </div>
-
-        <div className="mt-16 text-center">
-          <Link
-            to="/contato"
-            className="bg-brand-navy text-white font-semibold px-8 py-3 rounded-full hover:bg-brand-navy-light transition-colors"
-          >
-            Solicitar Orçamento
-          </Link>
-        </div>
-      </div>
+      </section>
     </main>
   )
 }

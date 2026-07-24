@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-brand-navy: #162155;
   --color-brand-navy-dark: #0e1738;
   --color-brand-navy-light: #1e2f6e;
-  --color-brand-yellow: #f5c518;
-  --color-brand-yellow-dark: #d4a800;
+  --color-brand-cyan: #00c8c8;
+  --color-brand-cyan-dark: #00a8a8;
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 

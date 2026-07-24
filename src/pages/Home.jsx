@@ -6,8 +6,7 @@ import heroImg from '../assets/hero.png'
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
+    opacity: 1, y: 0,
     transition: { duration: 0.6, delay: i * 0.15, ease: 'easeOut' },
   }),
 }
@@ -46,80 +45,84 @@ function ScrollReveal({ children, delay = 0 }) {
 
 export default function Home() {
   return (
-    <main className="pt-20">
-      {/* Hero */}
+    <main>
+      {/* Hero — tela cheia, header fixo sobrepõe */}
       <section
-        className="relative min-h-screen flex items-center justify-center text-white"
+        className="relative h-screen flex flex-col items-center justify-center text-white text-center px-6"
         style={{ backgroundImage: `url(${heroImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 bg-brand-navy/80" />
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+
+        <div className="relative z-10 max-w-4xl mx-auto">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-brand-yellow font-semibold text-sm uppercase tracking-widest mb-4"
+            className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-5"
           >
             Desde 1998 em São Paulo
           </motion.p>
+
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-5xl md:text-7xl font-black leading-tight mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight mb-6"
           >
-            Gestão de<br />
-            <span className="text-brand-yellow">estacionamentos</span><br />
+            Gestão de <span className="text-brand-cyan">estacionamentos</span>{' '}
             com excelência
           </motion.h1>
+
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white/70 text-lg md:text-xl mb-10 max-w-xl mx-auto"
+            className="text-white/70 text-base md:text-lg mb-10 max-w-xl mx-auto"
           >
             Administração completa de estacionamentos residenciais e comerciais.
             Segurança, tecnologia e atendimento personalizado.
           </motion.p>
+
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.45 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link
               to="/contato"
-              className="bg-brand-yellow text-brand-navy font-bold px-8 py-4 rounded-full hover:bg-brand-yellow-dark transition-colors text-sm uppercase tracking-wide"
+              className="bg-brand-cyan text-brand-navy font-bold px-8 py-3.5 rounded-full hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide"
             >
               Fale Conosco
             </Link>
             <Link
               to="/servicos"
-              className="border border-white/40 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/10 transition-colors text-sm uppercase tracking-wide"
+              className="border border-white/40 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-white/10 transition-colors text-sm uppercase tracking-wide"
             >
               Nossos Serviços
             </Link>
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — fixo ao fundo do hero */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 text-xs"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span>Role para baixo</span>
           <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="w-0.5 h-8 bg-white/30 rounded-full"
-          />
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+            className="w-6 h-6 border-2 border-white/30 rounded-full flex items-center justify-center"
+          >
+            <div className="w-1 h-1 bg-white/50 rounded-full" />
+          </motion.div>
         </motion.div>
       </section>
 
       {/* Estatísticas */}
-      <section className="bg-brand-yellow py-14 px-6">
+      <section className="bg-brand-cyan py-14 px-6">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {estatisticas.map((item, i) => (
             <ScrollReveal key={item.label} delay={i}>
@@ -131,20 +134,20 @@ export default function Home() {
       </section>
 
       {/* Serviços */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <p className="text-brand-yellow font-semibold text-sm uppercase tracking-widest mb-2">O que fazemos</p>
-              <h2 className="text-4xl font-black text-brand-navy">Nossos Serviços</h2>
+              <p className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-2">O que fazemos</p>
+              <h2 className="text-4xl font-black text-brand-navy dark:text-white">Nossos serviços</h2>
             </div>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {servicos.map((s, i) => (
               <ScrollReveal key={s.id} delay={i}>
-                <div className="group border-t-4 border-brand-yellow bg-gray-50 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <h3 className="text-xl font-bold text-brand-navy mb-3">{s.titulo}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{s.descricao}</p>
+                <div className="border-t-4 border-brand-cyan bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-3">{s.titulo}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{s.descricao}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -157,15 +160,15 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <p className="text-brand-yellow font-semibold text-sm uppercase tracking-widest mb-2">Por que a Park Plus</p>
-              <h2 className="text-4xl font-black text-white">Nossos Diferenciais</h2>
+              <p className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-2">Por que a Park Plus?</p>
+              <h2 className="text-4xl font-black text-white">Nossos diferenciais</h2>
             </div>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {diferenciais.map((item, i) => (
               <ScrollReveal key={item.id} delay={i}>
                 <div className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300">
-                  <div className="text-brand-yellow mb-4">{iconMap[item.icone]}</div>
+                  <div className="text-brand-cyan mb-4">{iconMap[item.icone]}</div>
                   <h3 className="text-xl font-bold text-white mb-3">{item.titulo}</h3>
                   <p className="text-white/60 text-sm leading-relaxed">{item.descricao}</p>
                 </div>
@@ -176,18 +179,18 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-gray-50">
+      <section className="py-24 px-6 bg-gray-50 dark:bg-slate-900 transition-colors">
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-black text-brand-navy mb-4">
+            <h2 className="text-4xl font-black text-brand-navy dark:text-white mb-4">
               Quer terceirizar seu estacionamento?
             </h2>
-            <p className="text-gray-500 mb-10 text-lg">
+            <p className="text-gray-500 dark:text-gray-400 mb-10 text-lg">
               Entre em contato e descubra como a Park Plus pode transformar a gestão do seu espaço.
             </p>
             <Link
               to="/contato"
-              className="bg-brand-navy text-white font-bold px-10 py-4 rounded-full hover:bg-brand-navy-dark transition-colors text-sm uppercase tracking-wide inline-block"
+              className="bg-brand-navy dark:bg-brand-cyan text-white dark:text-brand-navy font-bold px-10 py-4 rounded-full hover:bg-brand-navy-dark dark:hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide inline-block"
             >
               Enviar Proposta
             </Link>

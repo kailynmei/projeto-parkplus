@@ -7,15 +7,15 @@ export default function Footer() {
     <footer className="bg-brand-navy-dark text-white">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
-          <Logo className="h-14 w-auto mb-4" />
+          <Logo className="h-14 w-auto mb-4" onDark={true} />
           <p className="text-white/50 text-sm leading-relaxed max-w-xs">
             Administração profissional de estacionamentos em São Paulo há mais de 25 anos.
           </p>
-          <div className="mt-6 w-12 h-1 bg-brand-yellow rounded-full" />
+          <div className="mt-6 w-12 h-1 bg-brand-cyan rounded-full" />
         </div>
 
         <div>
-          <p className="font-bold text-sm uppercase tracking-widest text-white/40 mb-4">Páginas</p>
+          <p className="font-bold text-xs uppercase tracking-widest text-white/40 mb-4">Páginas</p>
           <ul className="flex flex-col gap-3 text-sm text-white/60">
             {[
               { to: '/sobre', label: 'Sobre' },
@@ -26,7 +26,7 @@ export default function Footer() {
               { to: '/contato', label: 'Contato' },
             ].map((link) => (
               <li key={link.to}>
-                <Link to={link.to} className="hover:text-brand-yellow transition-colors">
+                <Link to={link.to} className="hover:text-brand-cyan transition-colors">
                   {link.label}
                 </Link>
               </li>
@@ -35,14 +35,16 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="font-bold text-sm uppercase tracking-widest text-white/40 mb-4">Contato</p>
+          <p className="font-bold text-xs uppercase tracking-widest text-white/40 mb-4">Contato</p>
           <ul className="flex flex-col gap-3 text-sm text-white/60">
-            <li>{empresa.endereco}</li>
+            <li className="leading-relaxed">{empresa.endereco}</li>
             {empresa.telefones.map((tel) => (
-              <li key={tel}><a href={`tel:${tel}`} className="hover:text-brand-yellow transition-colors">{tel}</a></li>
+              <li key={tel}>
+                <a href={`tel:${tel}`} className="hover:text-brand-cyan transition-colors">{tel}</a>
+              </li>
             ))}
             <li>
-              <a href={`mailto:${empresa.email}`} className="hover:text-brand-yellow transition-colors">
+              <a href={`mailto:${empresa.email}`} className="hover:text-brand-cyan transition-colors">
                 {empresa.email}
               </a>
             </li>
@@ -50,7 +52,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/30 max-w-7xl mx-auto">
+      <div className="border-t border-white/10 px-6 py-5 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/30">
         <span>© {new Date().getFullYear()} {empresa.nome}. Todos os direitos reservados.</span>
         <span>www.parkplus.com.br</span>
       </div>
