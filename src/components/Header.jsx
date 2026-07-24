@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-        <Link to="/" className="font-bold text-xl text-blue-900">
+        <Link to="/" className="font-bold text-xl text-brand-navy">
           {empresa.nome}
         </Link>
 
@@ -31,8 +31,8 @@ export default function Header() {
               end={link.to === '/'}
               className={({ isActive }) =>
                 isActive
-                  ? 'text-blue-700 font-semibold text-sm'
-                  : 'text-gray-600 hover:text-blue-700 text-sm transition-colors'
+                  ? 'text-brand-navy-light font-semibold text-sm'
+                  : 'text-gray-600 hover:text-brand-navy-light text-sm transition-colors'
               }
             >
               {link.label}
@@ -62,7 +62,7 @@ export default function Header() {
               end={link.to === '/'}
               onClick={() => setMenuAberto(false)}
               className={({ isActive }) =>
-                isActive ? 'text-blue-700 font-semibold' : 'text-gray-600'
+                isActive ? 'text-brand-navy-light font-semibold' : 'text-gray-600'
               }
             >
               {link.label}
