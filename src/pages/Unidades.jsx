@@ -65,7 +65,8 @@ export default function Unidades() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                 </svg>
               </div>
-              <h2 className="font-bold text-brand-navy text-lg mb-1">{u.nome}</h2>
+              <h2 className="font-bold text-brand-navy text-lg mb-0.5">{u.nome}</h2>
+              <p className="text-brand-yellow font-semibold text-xs mb-2">{u.edificio}</p>
               <p className="text-gray-500 text-sm">{u.endereco}</p>
               <p className="text-gray-400 text-sm">{u.cidade}</p>
               {u.cep && <p className="text-gray-300 text-xs mt-1">CEP {u.cep}</p>}
