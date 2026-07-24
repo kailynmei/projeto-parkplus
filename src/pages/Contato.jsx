@@ -1,30 +1,42 @@
+import { motion } from 'framer-motion'
 import { empresa } from '../data/conteudo'
 
 export default function Contato() {
   return (
-    <main className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-brand-navy mb-4">Contato</h1>
-          <p className="text-gray-600">Fale com a nossa equipe. Retornamos em até 1 dia útil.</p>
-        </div>
+    <main className="pt-20">
+      <section className="bg-brand-navy py-20 px-6 text-center text-white">
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+          className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-3">
+          Fale com a gente
+        </motion.p>
+        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-4xl md:text-5xl font-black mb-4">
+          Contato
+        </motion.h1>
+        <p className="text-white/60">Retornamos em até 1 dia útil.</p>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Informações */}
           <div>
-            <h2 className="text-xl font-bold text-brand-navy mb-6">Informações</h2>
-            <div className="flex flex-col gap-4 text-gray-600">
+            <h2 className="text-xl font-bold text-brand-navy dark:text-white mb-6">Informações</h2>
+            <div className="flex flex-col gap-5 text-gray-600 dark:text-gray-400">
               <div>
-                <p className="font-semibold text-gray-800">Endereço</p>
-                <p>{empresa.endereco}</p>
+                <p className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Endereço</p>
+                <p className="text-sm">{empresa.endereco}</p>
               </div>
               <div>
-                <p className="font-semibold text-gray-800">Telefones</p>
-                {empresa.telefones.map((tel) => <p key={tel}>{tel}</p>)}
+                <p className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Telefones</p>
+                {empresa.telefones.map((tel) => (
+                  <p key={tel} className="text-sm">
+                    <a href={`tel:${tel}`} className="hover:text-brand-cyan transition-colors">{tel}</a>
+                  </p>
+                ))}
               </div>
               <div>
-                <p className="font-semibold text-gray-800">E-mail</p>
-                <a href={`mailto:${empresa.email}`} className="text-brand-navy-light hover:underline">
+                <p className="font-semibold text-gray-800 dark:text-gray-200 mb-1">E-mail</p>
+                <a href={`mailto:${empresa.email}`} className="text-sm text-brand-cyan hover:text-brand-cyan-dark transition-colors">
                   {empresa.email}
                 </a>
               </div>
@@ -33,27 +45,21 @@ export default function Contato() {
 
           {/* Formulário */}
           <div>
-            <h2 className="text-xl font-bold text-brand-navy mb-6">Envie uma mensagem</h2>
+            <h2 className="text-xl font-bold text-brand-navy dark:text-white mb-6">Envie uma mensagem</h2>
             <form className="flex flex-col gap-4">
+              {[
+                { label: 'Nome', type: 'text', placeholder: 'Seu nome' },
+                { label: 'E-mail', type: 'email', placeholder: 'seu@email.com' },
+              ].map(({ label, type, placeholder }) => (
+                <div key={label}>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</label>
+                  <input type={type} placeholder={placeholder}
+                    className="w-full border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan placeholder-gray-400 dark:placeholder-gray-500 transition-colors" />
+                </div>
+              ))}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Nome</label>
-                <input
-                  type="text"
-                  className="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                  placeholder="Seu nome"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
-                <input
-                  type="email"
-                  className="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-navy"
-                  placeholder="seu@email.com"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Assunto</label>
-                <select className="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-navy">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Assunto</label>
+                <select className="w-full border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan transition-colors">
                   <option value="">Selecione...</option>
                   <option value="proposta">Proposta Comercial</option>
                   <option value="convenio">Convênio</option>
@@ -62,23 +68,18 @@ export default function Contato() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Mensagem</label>
-                <textarea
-                  rows={4}
-                  className="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-navy resize-none"
-                  placeholder="Como podemos ajudar?"
-                />
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mensagem</label>
+                <textarea rows={4} placeholder="Como podemos ajudar?"
+                  className="w-full border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan resize-none placeholder-gray-400 dark:placeholder-gray-500 transition-colors" />
               </div>
-              <button
-                type="submit"
-                className="bg-brand-navy text-white font-semibold py-3 rounded-lg hover:bg-brand-navy-light transition-colors"
-              >
+              <button type="submit"
+                className="bg-brand-cyan text-brand-navy font-bold py-3 rounded-lg hover:bg-brand-cyan-dark transition-colors">
                 Enviar Mensagem
               </button>
             </form>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   )
 }
