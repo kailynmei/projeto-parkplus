@@ -6,4 +6,13 @@
   --color-brand-navy-light: #1e2f6e;
   --color-brand-yellow: #f5c518;
   --color-brand-yellow-dark: #d4a800;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+* {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }

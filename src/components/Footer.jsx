@@ -1,34 +1,48 @@
 import { Link } from 'react-router-dom'
 import { empresa } from '../data/conteudo'
+import Logo from './Logo'
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-navy text-white mt-auto">
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <h3 className="font-bold text-lg mb-3">{empresa.nome}</h3>
-          <p className="text-white/70 text-sm">{empresa.endereco}</p>
+    <footer className="bg-brand-navy-dark text-white">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="md:col-span-2">
+          <Logo className="h-14 w-auto mb-4" />
+          <p className="text-white/50 text-sm leading-relaxed max-w-xs">
+            Administração profissional de estacionamentos em São Paulo há mais de 25 anos.
+          </p>
+          <div className="mt-6 w-12 h-1 bg-brand-yellow rounded-full" />
         </div>
 
         <div>
-          <h3 className="font-bold text-lg mb-3">Links</h3>
-          <ul className="flex flex-col gap-2 text-sm text-white/70">
-            <li><Link to="/sobre" className="hover:text-white transition-colors">Sobre</Link></li>
-            <li><Link to="/servicos" className="hover:text-white transition-colors">Serviços</Link></li>
-            <li><Link to="/convenios" className="hover:text-white transition-colors">Convênios</Link></li>
-            <li><Link to="/unidades" className="hover:text-white transition-colors">Unidades</Link></li>
-            <li><Link to="/contato" className="hover:text-white transition-colors">Contato</Link></li>
+          <p className="font-bold text-sm uppercase tracking-widest text-white/40 mb-4">Páginas</p>
+          <ul className="flex flex-col gap-3 text-sm text-white/60">
+            {[
+              { to: '/sobre', label: 'Sobre' },
+              { to: '/servicos', label: 'Serviços' },
+              { to: '/convenios', label: 'Convênios' },
+              { to: '/gestao', label: 'Gestão' },
+              { to: '/unidades', label: 'Unidades' },
+              { to: '/contato', label: 'Contato' },
+            ].map((link) => (
+              <li key={link.to}>
+                <Link to={link.to} className="hover:text-brand-yellow transition-colors">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h3 className="font-bold text-lg mb-3">Contato</h3>
-          <ul className="flex flex-col gap-2 text-sm text-white/70">
+          <p className="font-bold text-sm uppercase tracking-widest text-white/40 mb-4">Contato</p>
+          <ul className="flex flex-col gap-3 text-sm text-white/60">
+            <li>{empresa.endereco}</li>
             {empresa.telefones.map((tel) => (
-              <li key={tel}>{tel}</li>
+              <li key={tel}><a href={`tel:${tel}`} className="hover:text-brand-yellow transition-colors">{tel}</a></li>
             ))}
             <li>
-              <a href={`mailto:${empresa.email}`} className="hover:text-white transition-colors">
+              <a href={`mailto:${empresa.email}`} className="hover:text-brand-yellow transition-colors">
                 {empresa.email}
               </a>
             </li>
@@ -36,8 +50,9 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-brand-navy-light text-center text-white/50 text-xs py-4">
-        © {new Date().getFullYear()} {empresa.nome}. Todos os direitos reservados.
+      <div className="border-t border-white/10 px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/30 max-w-7xl mx-auto">
+        <span>© {new Date().getFullYear()} {empresa.nome}. Todos os direitos reservados.</span>
+        <span>www.parkplus.com.br</span>
       </div>
     </footer>
   )

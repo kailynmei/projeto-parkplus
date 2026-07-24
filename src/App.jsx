@@ -12,7 +12,7 @@ import Contato from './pages/Contato'
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-white">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
