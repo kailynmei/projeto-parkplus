@@ -28,7 +28,7 @@ export default function Convenios() {
           </div>
           <div className="text-center">
             <p className="text-gray-500 dark:text-gray-400 mb-6">
-              Quer oferecer esse benefício aos seus clientes? Escolha o tipo de convênio ideal para o seu negócio.
+              Clique no botão abaixo e escolha o tipo de selo e características que deseja oferecer.
             </p>
             <a href={convenios.linkFormulario} target="_blank" rel="noopener noreferrer"
               className="bg-brand-cyan text-brand-navy font-bold px-8 py-3.5 rounded-full hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide">
