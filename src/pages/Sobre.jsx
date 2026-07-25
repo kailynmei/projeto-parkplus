@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { empresa, estatisticas } from '../data/conteudo'
+import SomosDiferentes from '../components/SomosDiferentes'
 
 export default function Sobre() {
   return (
@@ -40,6 +41,8 @@ export default function Sobre() {
           ))}
         </div>
       </section>
+
+      <SomosDiferentes />
     </main>
   )
 }

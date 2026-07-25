@@ -14,8 +14,18 @@ export const empresa = {
 
 export const estatisticas = [
   { valor: '25+', label: 'Anos de experiência' },
-  { valor: '16', label: 'Unidades em São Paulo' },
+  { valor: '16', label: 'Unidades em São Paulo e Grande SP' },
   { valor: '2.900+', label: 'Clientes atendidos por dia' },
+]
+
+export const segmentosAtendidos = [
+  'Bancos',
+  'Edifícios comerciais',
+  'Edifícios residenciais',
+  'Hospitais',
+  'Shoppings',
+  'Sindicatos',
+  'Escolas e universidades',
 ]
 
 export const servicos = [
@@ -35,9 +45,16 @@ export const servicos = [
   },
   {
     id: 3,
-    titulo: 'Lavagem de Veículos',
+    titulo: 'Vaga Mensalista',
     descricao:
-      'Serviço de lavagem completa e detalhamento de veículos, agregando valor e comodidade para os clientes do estacionamento.',
+      'Vagas sempre disponíveis em nossos endereços, com preços diferenciados para quem estaciona mais de um veículo.',
+    icone: 'key',
+  },
+  {
+    id: 4,
+    titulo: 'Wash Plus',
+    descricao:
+      'Lavagem completa de veículos com produtos de primeira linha, sem uso de água da Sabesp. Cera ou resina disponíveis como adicional opcional.',
     icone: 'car-wash',
   },
 ]
@@ -47,7 +64,7 @@ export const diferenciais = [
     id: 1,
     titulo: 'Segurança Total',
     descricao:
-      'Sinalização adequada, cobertura de seguro e monitoramento por câmeras 24 horas por dia, 7 dias por semana.',
+      'Sinalização adequada, cobertura de seguro, monitoramento por câmeras 24 horas, proteção em EVA nos locais estratégicos e equipe uniformizada e qualificada.',
     icone: 'shield',
   },
   {
@@ -61,8 +78,35 @@ export const diferenciais = [
     id: 3,
     titulo: 'Know-how em Diversos Segmentos',
     descricao:
-      'Mais de 25 anos de experiência em estacionamentos residenciais, comerciais e hospitalares em São Paulo.',
+      'Mais de 25 anos de experiência em estacionamentos residenciais, comerciais, hospitalares, educacionais e de shoppings em São Paulo.',
     icone: 'trophy',
+  },
+]
+
+export const faqGestao = [
+  {
+    id: 1,
+    pergunta: 'Quais são as vantagens de contratar a Park Plus para fazer a gestão do meu estacionamento?',
+    resposta:
+      'Contratar a Park Plus para a gestão de seu estacionamento pode trazer várias vantagens, como maior eficiência na gestão do espaço, geração de receita, redução de custos, aumento da segurança e da satisfação dos usuários, maior controle do fluxo de veículos e a possibilidade de implementação de novas tecnologias para aprimorar a gestão de seu estacionamento.',
+  },
+  {
+    id: 2,
+    pergunta: 'Como funciona a gestão de acesso dos usuários ao estacionamento?',
+    resposta:
+      'A gestão de acesso é feita por meio de um sistema informatizado que registra a entrada e saída dos veículos, permitindo maior segurança e controle do fluxo no local.',
+  },
+  {
+    id: 3,
+    pergunta: 'Quais são os diferenciais de um estacionamento bem gerenciado?',
+    resposta:
+      'Um estacionamento bem gerenciado possui um planejamento de operação com a circulação otimizada, comunicação visual padronizada, controle de qualidade rigoroso, além de segurança com proteções e seguro total.',
+  },
+  {
+    id: 4,
+    pergunta: 'Como é feito o controle de qualidade nos estacionamentos gerenciados?',
+    resposta:
+      'O controle de qualidade é feito através de metodologias como Cliente Oculto e Pesquisas de Satisfação com os usuários, a fim de verificar se os pontos-chave da operação estão dentro dos padrões de qualidade, assim como a satisfação dos usuários.',
   },
 ]
 
@@ -229,4 +273,15 @@ export const unidades = [
     cidade: 'Cotia – SP',
     cep: '06711-020',
   },
+]
+
+export const somosDiferentes = [
+  'Planejamento eficiente da operação em diversos segmentos',
+  'Controle de qualidade rigoroso',
+  'Comunicação visual padronizada e feita para otimizar o tempo e orientar melhor os usuários',
+  'Colaboradores devidamente identificados e uniformizados, treinados para identificar as particularidades de cada usuário do estacionamento',
+  'Controle de acesso informatizado com registro',
+  'Circuito de câmeras 24 horas',
+  'Seguro com cobertura total dos veículos',
+  'Proteção em EVA nos locais estratégicos',
 ]

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { diferenciais } from '../data/conteudo'
+import Faq from '../components/Faq'
 
 export default function Gestao() {
   return (
@@ -45,6 +46,8 @@ export default function Gestao() {
           </div>
         </div>
       </section>
+
+      <Faq />
     </main>
   )
 }

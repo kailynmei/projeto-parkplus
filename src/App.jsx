@@ -4,6 +4,8 @@ import { useDarkMode } from './hooks/useDarkMode'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import BackToTop from './components/BackToTop'
+import ScrollToTop from './components/ScrollToTop'
+import WhatsAppButton from './components/WhatsAppButton'
 import Home from './pages/Home'
 import Sobre from './pages/Sobre'
 import Servicos from './pages/Servicos'
@@ -18,6 +20,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ dark, toggle }}>
       <BrowserRouter>
+        <ScrollToTop />
         <div className="flex flex-col min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
           <Header />
           <Routes>
@@ -31,6 +34,7 @@ export default function App() {
           </Routes>
           <Footer />
           <BackToTop />
+          <WhatsAppButton />
         </div>
       </BrowserRouter>
     </ThemeContext.Provider>

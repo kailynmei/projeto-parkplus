@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { estatisticas, diferenciais, servicos } from '../data/conteudo'
 import heroImg from '../assets/hero.png'
+import VideoSection from '../components/VideoSection'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -177,6 +178,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Vídeo institucional */}
+      <VideoSection />
 
       {/* CTA */}
       <section className="py-24 px-6 bg-gray-50 dark:bg-slate-900 transition-colors">

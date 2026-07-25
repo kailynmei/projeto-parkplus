@@ -13,7 +13,6 @@ export default function Contato() {
           className="text-4xl md:text-5xl font-black mb-4">
           Contato
         </motion.h1>
-        <p className="text-white/60">Retornamos em até 1 dia útil.</p>
       </section>
 
       <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
