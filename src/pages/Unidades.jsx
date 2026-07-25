@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { unidades } from '../data/conteudo'
+import Card from '../components/Card'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -27,11 +28,12 @@ export default function Unidades() {
         </motion.p>
       </section>
 
-      <section className="py-20 px-6 bg-gray-50 dark:bg-slate-950 transition-colors">
+      <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {unidades.map((u, i) => (
-            <motion.a
+            <Card
               key={u.id}
+              as={motion.a}
               href={`https://www.google.com/maps/search/${encodeURIComponent(u.endereco + ', ' + u.cidade)}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -40,7 +42,7 @@ export default function Unidades() {
               viewport={{ once: true, margin: '-60px' }}
               custom={i}
               variants={fadeUp}
-              className="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-100 dark:border-white/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="p-6 hover:-translate-y-1"
             >
               <div className="flex items-start justify-between mb-4">
                 <span className="bg-brand-cyan/15 text-brand-cyan text-xs font-bold px-3 py-1 rounded-full">
@@ -56,7 +58,7 @@ export default function Unidades() {
               <p className="text-gray-400 dark:text-gray-500 text-sm">{u.cidade}</p>
               {u.cep && <p className="text-gray-300 dark:text-gray-600 text-xs mt-1">CEP {u.cep}</p>}
               <div className="mt-4 w-8 h-0.5 bg-brand-cyan rounded-full group-hover:w-16 transition-all duration-300" />
-            </motion.a>
+            </Card>
           ))}
         </div>
       </section>

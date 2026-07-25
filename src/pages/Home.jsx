@@ -1,8 +1,16 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { estatisticas, diferenciais, servicos } from '../data/conteudo'
 import heroImg from '../assets/hero.png'
 import VideoSection from '../components/VideoSection'
+import Card from '../components/Card'
+
+// Fotos do slideshow de fundo (Hero + Estatísticas compartilham o mesmo pano de fundo).
+// Por enquanto só tem uma foto — quando as demais chegarem, é só importar e
+// adicionar aqui no array (ex: [heroImg, unidadeCotia, unidadePerdizes, ...]).
+// Com 2+ fotos, o crossfade automático entra em ação sozinho.
+const heroImages = [heroImg]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -38,99 +46,179 @@ function ScrollReveal({ children, delay = 0 }) {
       viewport={{ once: true, margin: '-80px' }}
       custom={delay}
       variants={fadeUp}
+      className="h-full"
     >
       {children}
     </motion.div>
   )
 }
 
+// Conta de 0 até o alvo em requestAnimationFrame, só quando "start" vira true
+function useCountUp(target, duration = 1800, start = false) {
+  const [value, setValue] = useState(0)
+
+  useEffect(() => {
+    if (!start) return
+    let startTime = null
+    let frame
+
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp
+      const progress = Math.min((timestamp - startTime) / duration, 1)
+      setValue(Math.floor(progress * target))
+      if (progress < 1) {
+        frame = requestAnimationFrame(step)
+      } else {
+        setValue(target)
+      }
+    }
+
+    frame = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frame)
+  }, [start, target, duration])
+
+  return value
+}
+
+// Extrai o número de strings tipo "25+", "16", "2.900+" e anima só a parte numérica
+function AnimatedStat({ valor, label, delay = 0 }) {
+  const target = parseInt(valor.replace(/[^\d]/g, ''), 10) || 0
+  const suffix = valor.replace(/[\d.,]/g, '')
+  const [started, setStarted] = useState(false)
+  const count = useCountUp(target, 1800, started)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      onViewportEnter={() => setStarted(true)}
+      transition={{ duration: 0.6, delay: delay * 0.15 }}
+    >
+      <p className="text-5xl font-black text-white">
+        {count.toLocaleString('pt-BR')}
+        {suffix}
+      </p>
+      <p className="text-white/70 font-medium mt-1">{label}</p>
+    </motion.div>
+  )
+}
+
+// Fundo com slideshow (crossfade) e efeito parallax (bg-fixed).
+// Cobre toda a altura da section pai (Hero + Estatísticas juntos).
+function ParallaxSlideshow({ images }) {
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    if (images.length < 2) return
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % images.length)
+    }, 6000)
+    return () => clearInterval(id)
+  }, [images.length])
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <AnimatePresence>
+        <motion.div
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          className="absolute inset-0 bg-fixed bg-cover bg-center"
+          style={{ backgroundImage: `url(${images[index]})` }}
+        />
+      </AnimatePresence>
+    </div>
+  )
+}
+
 export default function Home() {
   return (
     <main>
-      {/* Hero — tela cheia, header fixo sobrepõe */}
-      <section
-        className="relative h-screen flex flex-col items-center justify-center text-white text-center px-6"
-        style={{ backgroundImage: `url(${heroImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-      >
-        <div className="absolute inset-0 bg-brand-navy/80" />
+      {/* Hero + Estatísticas — bloco único com fundo em parallax (slideshow) */}
+      <section className="relative">
+        <ParallaxSlideshow images={heroImages} />
+        <div className="absolute inset-0 bg-brand-navy/75" />
 
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-5"
-          >
-            Desde 1998 em São Paulo
-          </motion.p>
+        {/* Hero */}
+        <div className="relative min-h-screen flex flex-col items-center justify-center text-white text-center px-6">
+          <div className="max-w-4xl mx-auto">
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-5"
+            >
+              Desde 1998 em São Paulo
+            </motion.p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight mb-6"
-          >
-            Gestão de <span className="text-brand-cyan">estacionamentos</span>{' '}
-            com excelência
-          </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-black leading-tight mb-6"
+            >
+              Gestão de <span className="text-brand-cyan">estacionamentos</span>{' '}
+              com excelência
+            </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-white/70 text-base md:text-lg mb-10 max-w-xl mx-auto"
-          >
-            Administração completa de estacionamentos residenciais e comerciais.
-            Segurança, tecnologia e atendimento personalizado.
-          </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-white/70 text-base md:text-lg mb-10 max-w-xl mx-auto"
+            >
+              Administração completa de estacionamentos residenciais e comerciais.
+              Segurança, tecnologia e atendimento personalizado.
+            </motion.p>
 
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <Link
+                to="/contato"
+                className="bg-brand-cyan text-brand-navy font-bold px-8 py-3.5 rounded-full hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide"
+              >
+                Fale Conosco
+              </Link>
+              <Link
+                to="/servicos"
+                className="border border-white/40 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-white/10 transition-colors text-sm uppercase tracking-wide"
+              >
+                Nossos Serviços
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Scroll indicator */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           >
-            <Link
-              to="/contato"
-              className="bg-brand-cyan text-brand-navy font-bold px-8 py-3.5 rounded-full hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide"
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+              className="w-6 h-6 border-2 border-white/30 rounded-full flex items-center justify-center"
             >
-              Fale Conosco
-            </Link>
-            <Link
-              to="/servicos"
-              className="border border-white/40 text-white font-semibold px-8 py-3.5 rounded-full hover:bg-white/10 transition-colors text-sm uppercase tracking-wide"
-            >
-              Nossos Serviços
-            </Link>
+              <div className="w-1 h-1 bg-white/50 rounded-full" />
+            </motion.div>
           </motion.div>
         </div>
 
-        {/* Scroll indicator — fixo ao fundo do hero */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
-            className="w-6 h-6 border-2 border-white/30 rounded-full flex items-center justify-center"
-          >
-            <div className="w-1 h-1 bg-white/50 rounded-full" />
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* Estatísticas */}
-      <section className="bg-brand-cyan py-14 px-6">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          {estatisticas.map((item, i) => (
-            <ScrollReveal key={item.label} delay={i}>
-              <p className="text-5xl font-black text-brand-navy">{item.valor}</p>
-              <p className="text-brand-navy/70 font-medium mt-1">{item.label}</p>
-            </ScrollReveal>
-          ))}
+        {/* Estatísticas — mesmo fundo, continuando o scroll */}
+        <div className="relative pt-0 pb-16 px-6">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+            {estatisticas.map((item, i) => (
+              <AnimatedStat key={item.label} valor={item.valor} label={item.label} delay={i} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -146,10 +234,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {servicos.map((s, i) => (
               <ScrollReveal key={s.id} delay={i}>
-                <div className="border-t-4 border-brand-cyan bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <Card interactive={false} className="h-full p-8 hover:-translate-y-1">
                   <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-3">{s.titulo}</h3>
                   <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{s.descricao}</p>
-                </div>
+                </Card>
               </ScrollReveal>
             ))}
           </div>
@@ -168,7 +256,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {diferenciais.map((item, i) => (
               <ScrollReveal key={item.id} delay={i}>
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300">
+                <div className="h-full bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-300">
                   <div className="text-brand-cyan mb-4">{iconMap[item.icone]}</div>
                   <h3 className="text-xl font-bold text-white mb-3">{item.titulo}</h3>
                   <p className="text-white/60 text-sm leading-relaxed">{item.descricao}</p>
