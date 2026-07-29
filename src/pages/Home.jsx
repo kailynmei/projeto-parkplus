@@ -2,15 +2,17 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { estatisticas, diferenciais, servicos } from '../data/conteudo'
-import heroImg from '../assets/hero.png'
+import heroImg from '../assets/Unidades/unidade0.png'
+import unidade1 from '../assets/Unidades/unidade1.jpg'
+import unidade2 from '../assets/Unidades/unidade2.jpg'
+import unidade3 from '../assets/Unidades/unidade3.jpg'
+import unidade4 from '../assets/Unidades/unidade4.jpg'
 import VideoSection from '../components/VideoSection'
 import Card from '../components/Card'
 
 // Fotos do slideshow de fundo (Hero + Estatísticas compartilham o mesmo pano de fundo).
-// Por enquanto só tem uma foto — quando as demais chegarem, é só importar e
-// adicionar aqui no array (ex: [heroImg, unidadeCotia, unidadePerdizes, ...]).
-// Com 2+ fotos, o crossfade automático entra em ação sozinho.
-const heroImages = [heroImg]
+// O crossfade automático troca de foto a cada 6s.
+const heroImages = [heroImg, unidade1, unidade2, unidade3, unidade4]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -106,6 +108,8 @@ function AnimatedStat({ valor, label, delay = 0 }) {
 
 // Fundo com slideshow (crossfade) e efeito parallax (bg-fixed).
 // Cobre toda a altura da section pai (Hero + Estatísticas juntos).
+// bg-top prioriza a parte de cima da foto (onde normalmente fica a placa/sinalização
+// nas fotos de fachada), reduzindo o corte em fotos tiradas na vertical.
 function ParallaxSlideshow({ images }) {
   const [index, setIndex] = useState(0)
 
@@ -113,7 +117,7 @@ function ParallaxSlideshow({ images }) {
     if (images.length < 2) return
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % images.length)
-    }, 6000)
+    }, 3300)
     return () => clearInterval(id)
   }, [images.length])
 
@@ -126,7 +130,7 @@ function ParallaxSlideshow({ images }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
-          className="absolute inset-0 bg-fixed bg-cover bg-center"
+          className="absolute inset-0 bg-fixed bg-cover bg-top"
           style={{ backgroundImage: `url(${images[index]})` }}
         />
       </AnimatePresence>

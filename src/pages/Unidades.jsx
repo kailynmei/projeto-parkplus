@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { unidades } from '../data/conteudo'
 import Card from '../components/Card'
+import unidadesBanner from '../assets/Unidades/unidade3.jpg'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -13,17 +14,22 @@ const fadeUp = {
 export default function Unidades() {
   return (
     <main className="pt-20">
-      <section className="bg-brand-navy py-20 px-6 text-center text-white">
+      <section
+        className="relative py-20 px-6 text-center text-white bg-cover"
+        style={{ backgroundImage: `url(${unidadesBanner})`, backgroundPosition: 'center 35%' }}
+      >
+        <div className="absolute inset-0 bg-brand-navy/80" />
+
         <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
-          className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-3">
+          className="relative text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-3">
           Estamos em toda São Paulo
         </motion.p>
         <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl font-black mb-4">
+          className="relative text-4xl md:text-5xl font-black mb-4">
           Nossas unidades
         </motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-white/60 max-w-md mx-auto">
+          className="relative text-white/60 max-w-md mx-auto">
           {unidades.length} unidades operando em São Paulo e Grande SP.
         </motion.p>
       </section>

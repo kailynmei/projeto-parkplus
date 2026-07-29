@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
-import heroImg from '../assets/hero.png'
+import heroImg from '../assets/Unidades/unidade0.png'
 
 function PlayIcon() {
   return (
