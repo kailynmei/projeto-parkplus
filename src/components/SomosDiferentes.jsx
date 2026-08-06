@@ -26,7 +26,6 @@ export default function SomosDiferentes() {
             Somos Diferentes
           </h2>
           <div className="w-12 h-1 bg-brand-cyan rounded-full mb-6" />
-          <p className="text-white/60 mb-8">Veja como nos destacamos:</p>
           <Link
             to="/contato"
             className="inline-block bg-brand-cyan text-brand-navy font-bold px-8 py-3.5 rounded-full hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide"

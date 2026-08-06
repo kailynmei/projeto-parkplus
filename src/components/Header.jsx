@@ -4,6 +4,7 @@ import Logo from './Logo'
 import { useTheme } from '../context/ThemeContext'
 
 const navLinks = [
+  { to: '/', label: 'Home' },
   { to: '/sobre', label: 'Sobre' },
   { to: '/servicos', label: 'Serviços' },
   { to: '/convenios', label: 'Convênios' },

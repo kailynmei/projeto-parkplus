@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { estatisticas, diferenciais, servicos } from '../data/conteudo'
+import { estatisticas, diferenciais } from '../data/conteudo'
 import heroImg from '../assets/Unidades/unidade0.png'
 import unidade1 from '../assets/Unidades/unidade1.jpg'
 import unidade2 from '../assets/Unidades/unidade2.jpg'
@@ -12,7 +12,6 @@ import destaque2 from '../assets/Unidades/unidade9.jpg'
 import destaque3 from '../assets/Unidades/unidade14.jpg'
 import destaque4 from '../assets/Unidades/unidade16.jpg'
 import VideoSection from '../components/VideoSection'
-import Card from '../components/Card'
 
 const heroImages = [heroImg, unidade1, unidade2, unidade3, unidade4]
 
@@ -254,27 +253,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 px-6 bg-white dark:bg-slate-950 transition-colors">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal>
-            <div className="text-center mb-16">
-              <p className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-2">O que fazemos</p>
-              <h2 className="text-4xl font-black text-brand-navy dark:text-white">Nossos serviços</h2>
-            </div>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {servicos.map((s, i) => (
-              <ScrollReveal key={s.id} delay={i}>
-                <Card interactive={false} className="h-full p-8 hover:-translate-y-1">
-                  <h3 className="text-xl font-bold text-brand-navy dark:text-white mb-3">{s.titulo}</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{s.descricao}</p>
-                </Card>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="py-24 px-6 bg-brand-navy">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
@@ -325,7 +303,7 @@ export default function Home() {
 
       <VideoSection />
 
-      <section className="py-24 px-6 bg-gray-50 dark:bg-slate-900 transition-colors">
+      <section className="py-24 px-6 bg-white dark:bg-slate-950 transition-colors">
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-black text-brand-navy dark:text-white mb-4">

@@ -5,6 +5,8 @@ import ScrollReveal from '../components/ScrollReveal'
 import sobreBanner from '../assets/Unidades/unidade6.jpg'
 import escritorioImg from '../assets/Unidades/escritorio-alamedaolga.jpg'
 
+const enderecoEscritorio = 'Alameda Olga, 422, Barra Funda, São Paulo - SP'
+
 export default function Sobre() {
   return (
     <main className="pt-20">
@@ -57,9 +59,20 @@ export default function Sobre() {
               e Grande São Paulo. É por aqui que passam a gestão financeira, o suporte a clientes e
               o planejamento de cada estacionamento que administramos.
             </p>
-            <p className="text-gray-500 dark:text-gray-500 text-sm">
-              Alameda Olga, 422 — Barra Funda, São Paulo — SP
-            </p>
+            <a
+              href={`https://www.google.com/maps/search/${encodeURIComponent(enderecoEscritorio)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 text-brand-navy dark:text-white font-semibold text-sm hover:text-brand-cyan dark:hover:text-brand-cyan transition-colors"
+            >
+              <svg className="w-4 h-4 text-brand-cyan shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+              </svg>
+              <span className="border-b border-transparent group-hover:border-brand-cyan transition-colors">
+                Alameda Olga, 422 — Barra Funda, São Paulo — SP
+              </span>
+            </a>
           </ScrollReveal>
         </div>
       </section>
