@@ -1,16 +1,63 @@
-# React + Vite
+# Park Plus Estacionamentos — Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Site institucional da **Park Plus Estacionamentos**, empresa de administração de estacionamentos fundada em 1998 em São Paulo. Reconstrução completa do site anterior (WordPress) como aplicação React moderna, com conteúdo separado de estrutura para facilitar manutenção futura.
 
-Currently, two official plugins are available:
+🔗 Site original: [parkplus.com.br](https://www.parkplus.com.br/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- **React 19** + **Vite**
+- **React Router 7** — roteamento entre páginas
+- **Tailwind CSS v4** — configurado via `@theme` em `index.css` (não usa `tailwind.config.js`)
+- **Framer Motion** — animações e transições
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Estrutura do projeto
 
-## Expanding the Oxlint configuration
+```
+src/
+├── assets/
+│   ├── logo-light.png / logo-dark.png
+│   └── Unidades/            # fotos das unidades (atenção: "U" maiúsculo)
+├── components/
+│   ├── Card.jsx
+│   ├── BackToTop.jsx
+│   ├── ScrollToTop.jsx
+│   ├── WhatsAppButton.jsx
+│   ├── VideoSection.jsx
+│   ├── Faq.jsx
+│   ├── SomosDiferentes.jsx
+│   ├── LocationsPattern.jsx
+│   ├── ParallaxSlideshow.jsx
+│   ├── IntroSplash.jsx
+│   └── Footer.jsx
+├── pages/
+│   ├── Home.jsx
+│   ├── Unidades.jsx
+│   ├── Gestao.jsx
+│   ├── Sobre.jsx
+│   └── Convenios.jsx
+├── conteudo.js               # todo o conteúdo textual do site, centralizado
+└── App.jsx
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Por que o conteúdo fica separado (`conteudo.js`)
+
+Textos, dados de unidades, FAQ e estatísticas vivem em `conteudo.js`. Isso permite atualizar informações (endereços, telefone, texto institucional) sem tocar em nenhum componente.
+
+## Rodando localmente
+
+```bash
+npm install
+npm run dev
+```
+
+## Build de produção
+
+```bash
+npm run build
+npm run preview   # testa o build localmente antes do deploy
+```
+
+## Deploy
+
+Projeto configurado para deploy na **Vercel** (detecção automática de Vite). Como usa React Router com rotas client-side, é necessário um rewrite para SPA — ver `vercel.json` na raiz do projeto.
