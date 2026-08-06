@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { unidades } from '../data/conteudo'
 import Card from '../components/Card'
+import MapaUnidades from '../components/MapaUnidades'
 import unidadesBanner from '../assets/Unidades/unidade3.jpg'
 
 const fadeUp = {
@@ -30,11 +31,30 @@ export default function Unidades() {
         </motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.2 }}
           className="relative text-white/60 max-w-md mx-auto">
-          {unidades.length} unidades operando em São Paulo e Grande SP.
+          Unidades operando em São Paulo e Grande SP.
         </motion.p>
       </section>
 
-      <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
+      <section className="py-16 px-6 bg-white dark:bg-slate-950 transition-colors">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-2xl font-bold text-brand-navy dark:text-white mb-1">
+              Nossas unidades no mapa
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">
+              Encontre a unidade Park Plus mais próxima de você.
+            </p>
+            <MapaUnidades />
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="pb-20 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {unidades.map((u, i) => (
             <Card

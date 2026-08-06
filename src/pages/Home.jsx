@@ -10,8 +10,6 @@ import unidade4 from '../assets/Unidades/unidade4.jpg'
 import VideoSection from '../components/VideoSection'
 import Card from '../components/Card'
 
-// Fotos do slideshow de fundo (Hero + Estatísticas compartilham o mesmo pano de fundo).
-// O crossfade automático troca de foto a cada 3,3s.
 const heroImages = [heroImg, unidade1, unidade2, unidade3, unidade4]
 
 const fadeUp = {
@@ -55,7 +53,6 @@ function ScrollReveal({ children, delay = 0 }) {
   )
 }
 
-// Conta de 0 até o alvo em requestAnimationFrame, só quando "start" vira true
 function useCountUp(target, duration = 1800, start = false) {
   const [value, setValue] = useState(0)
 
@@ -82,10 +79,10 @@ function useCountUp(target, duration = 1800, start = false) {
   return value
 }
 
-// Extrai o número de strings tipo "25+", "16", "2.900+" e anima só a parte numérica
 function AnimatedStat({ valor, label, delay = 0 }) {
-  const target = parseInt(valor.replace(/[^\d]/g, ''), 10) || 0
-  const suffix = valor.replace(/[\d.,]/g, '')
+  const hasNumber = /\d/.test(valor)
+  const target = hasNumber ? parseInt(valor.replace(/[^\d]/g, ''), 10) || 0 : 0
+  const suffix = hasNumber ? valor.replace(/[\d.,]/g, '') : ''
   const [started, setStarted] = useState(false)
   const count = useCountUp(target, 1800, started)
 
@@ -98,21 +95,13 @@ function AnimatedStat({ valor, label, delay = 0 }) {
       transition={{ duration: 0.6, delay: delay * 0.15 }}
     >
       <p className="text-5xl font-black text-white">
-        {count.toLocaleString('pt-BR')}
-        {suffix}
+        {hasNumber ? `${count.toLocaleString('pt-BR')}${suffix}` : valor}
       </p>
       <p className="text-white/70 font-medium mt-1">{label}</p>
     </motion.div>
   )
 }
 
-// Fundo com slideshow (crossfade) e efeito parallax (bg-fixed).
-// Cobre toda a altura da section pai (Hero + Estatísticas juntos).
-// bg-top prioriza a parte de cima da foto (onde normalmente fica a placa/sinalização
-// nas fotos de fachada), reduzindo o corte em fotos tiradas na vertical.
-// bg-scroll no mobile (e só bg-fixed a partir de md:) evita o efeito de "zoom"
-// excessivo que o parallax causa em telas estreitas/altas, além do bg-fixed
-// não funcionar direito no Safari do iPhone de qualquer forma.
 function ParallaxSlideshow({ images }) {
   const [index, setIndex] = useState(0)
 
@@ -144,13 +133,10 @@ function ParallaxSlideshow({ images }) {
 export default function Home() {
   return (
     <main>
-      {/* Hero + Estatísticas — bloco único com fundo em parallax (slideshow) */}
       <section className="relative">
         <ParallaxSlideshow images={heroImages} />
         <div className="absolute inset-0 bg-brand-navy/75" />
 
-        {/* Hero — altura reduzida no mobile (min-h-[70vh]) evita zoom excessivo
-            do bg-cover; do sm: pra cima cresce até tela cheia (min-h-screen) */}
         <div className="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-screen flex flex-col items-center justify-center text-white text-center px-6 pt-24">
           <div className="max-w-4xl mx-auto">
             <motion.p
@@ -203,7 +189,6 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Scroll indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -220,7 +205,6 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Estatísticas — mesmo fundo, continuando o scroll */}
         <div className="relative pt-0 pb-16 px-6">
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
             {estatisticas.map((item, i) => (
@@ -230,7 +214,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Serviços */}
       <section className="py-24 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
@@ -252,7 +235,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Diferenciais */}
       <section className="py-24 px-6 bg-brand-navy">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
@@ -275,10 +257,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Vídeo institucional */}
       <VideoSection />
 
-      {/* CTA */}
       <section className="py-24 px-6 bg-gray-50 dark:bg-slate-900 transition-colors">
         <ScrollReveal>
           <div className="max-w-3xl mx-auto text-center">

@@ -14,7 +14,7 @@ export const empresa = {
 
 export const estatisticas = [
   { valor: '25+', label: 'Anos de experiência' },
-  { valor: '16', label: 'Unidades em São Paulo e Grande SP' },
+  { valor: '24h', label: 'Monitoramento e segurança' },
   { valor: '2.900+', label: 'Clientes atendidos por dia' },
 ]
 
