@@ -11,7 +11,7 @@ import VideoSection from '../components/VideoSection'
 import Card from '../components/Card'
 
 // Fotos do slideshow de fundo (Hero + Estatísticas compartilham o mesmo pano de fundo).
-// O crossfade automático troca de foto a cada 6s.
+// O crossfade automático troca de foto a cada 3,3s.
 const heroImages = [heroImg, unidade1, unidade2, unidade3, unidade4]
 
 const fadeUp = {
@@ -110,6 +110,9 @@ function AnimatedStat({ valor, label, delay = 0 }) {
 // Cobre toda a altura da section pai (Hero + Estatísticas juntos).
 // bg-top prioriza a parte de cima da foto (onde normalmente fica a placa/sinalização
 // nas fotos de fachada), reduzindo o corte em fotos tiradas na vertical.
+// bg-scroll no mobile (e só bg-fixed a partir de md:) evita o efeito de "zoom"
+// excessivo que o parallax causa em telas estreitas/altas, além do bg-fixed
+// não funcionar direito no Safari do iPhone de qualquer forma.
 function ParallaxSlideshow({ images }) {
   const [index, setIndex] = useState(0)
 
@@ -130,7 +133,7 @@ function ParallaxSlideshow({ images }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1.5, ease: 'easeInOut' }}
-          className="absolute inset-0 bg-fixed bg-cover bg-top"
+          className="absolute inset-0 bg-scroll md:bg-fixed bg-cover bg-top"
           style={{ backgroundImage: `url(${images[index]})` }}
         />
       </AnimatePresence>
@@ -146,8 +149,9 @@ export default function Home() {
         <ParallaxSlideshow images={heroImages} />
         <div className="absolute inset-0 bg-brand-navy/75" />
 
-        {/* Hero */}
-        <div className="relative min-h-screen flex flex-col items-center justify-center text-white text-center px-6">
+        {/* Hero — altura reduzida no mobile (min-h-[70vh]) evita zoom excessivo
+            do bg-cover; do sm: pra cima cresce até tela cheia (min-h-screen) */}
+        <div className="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-screen flex flex-col items-center justify-center text-white text-center px-6 pt-24">
           <div className="max-w-4xl mx-auto">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
