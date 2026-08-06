@@ -7,10 +7,21 @@ import unidade1 from '../assets/Unidades/unidade1.jpg'
 import unidade2 from '../assets/Unidades/unidade2.jpg'
 import unidade3 from '../assets/Unidades/unidade3.jpg'
 import unidade4 from '../assets/Unidades/unidade4.jpg'
+import destaque1 from '../assets/Unidades/unidade7.jpg'
+import destaque2 from '../assets/Unidades/unidade9.jpg'
+import destaque3 from '../assets/Unidades/unidade14.jpg'
+import destaque4 from '../assets/Unidades/unidade16.jpg'
 import VideoSection from '../components/VideoSection'
 import Card from '../components/Card'
 
 const heroImages = [heroImg, unidade1, unidade2, unidade3, unidade4]
+
+const unidadesDestaque = [
+  { nome: 'Empresarial Perdizes', bairro: 'Perdizes', imagem: destaque1 },
+  { nome: 'Heleno Tower', bairro: 'Perdizes', imagem: destaque2 },
+  { nome: 'The Point Office Park', bairro: 'Alto de Pinheiros', imagem: destaque3 },
+  { nome: 'TPA Granja Viana', bairro: 'Cotia', imagem: destaque4 },
+]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -38,7 +49,7 @@ const iconMap = {
   ),
 }
 
-function ScrollReveal({ children, delay = 0 }) {
+function ScrollReveal({ children, delay = 0, className = '' }) {
   return (
     <motion.div
       initial="hidden"
@@ -46,7 +57,7 @@ function ScrollReveal({ children, delay = 0 }) {
       viewport={{ once: true, margin: '-80px' }}
       custom={delay}
       variants={fadeUp}
-      className="h-full"
+      className={className}
     >
       {children}
     </motion.div>
@@ -127,6 +138,35 @@ function ParallaxSlideshow({ images }) {
         />
       </AnimatePresence>
     </div>
+  )
+}
+
+function UnitShowcaseCard({ nome, bairro, imagem, i }) {
+  return (
+    <ScrollReveal delay={i} className="h-full">
+      <Link
+        to="/unidades"
+        className="group relative block h-64 sm:h-72 rounded-2xl overflow-hidden shadow-sm"
+      >
+        <img
+          src={imagem}
+          alt={nome}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/95 via-brand-navy/30 to-transparent transition-opacity duration-300 group-hover:from-brand-navy/90" />
+
+        <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+          <p className="font-bold text-lg leading-tight">{nome}</p>
+          <p className="text-white/70 text-sm mb-1">{bairro}</p>
+          <span className="inline-flex items-center gap-1 text-brand-cyan text-xs font-semibold uppercase tracking-wide opacity-0 -translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+            Ver unidade
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            </svg>
+          </span>
+        </div>
+      </Link>
+    </ScrollReveal>
   )
 }
 
@@ -254,6 +294,32 @@ export default function Home() {
               </ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 bg-gray-50 dark:bg-slate-900 transition-colors">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-16">
+              <p className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-2">Onde estamos</p>
+              <h2 className="text-4xl font-black text-brand-navy dark:text-white">Algumas de nossas unidades</h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {unidadesDestaque.map((u, i) => (
+              <UnitShowcaseCard key={u.nome} nome={u.nome} bairro={u.bairro} imagem={u.imagem} i={i} />
+            ))}
+          </div>
+
+          <ScrollReveal className="text-center">
+            <Link
+              to="/unidades"
+              className="inline-block bg-brand-navy dark:bg-brand-cyan text-white dark:text-brand-navy font-bold px-8 py-3.5 rounded-full hover:bg-brand-navy-dark dark:hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide"
+            >
+              Ver Todas as Unidades
+            </Link>
+          </ScrollReveal>
         </div>
       </section>
 

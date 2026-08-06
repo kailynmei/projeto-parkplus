@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { servicos } from '../data/conteudo'
 import PageBanner from '../components/PageBanner'
+import ScrollReveal from '../components/ScrollReveal'
 import servicosBanner from '../assets/Unidades/unidade13.jpg'
 
 export default function Servicos() {
@@ -17,11 +17,13 @@ export default function Servicos() {
       <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {servicos.map((s) => (
-              <div key={s.id} className="border-t-4 border-brand-cyan bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <h2 className="text-xl font-bold text-brand-navy dark:text-white mb-3">{s.titulo}</h2>
-                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{s.descricao}</p>
-              </div>
+            {servicos.map((s, i) => (
+              <ScrollReveal key={s.id} delay={i} className="h-full">
+                <div className="h-full border-t-4 border-brand-cyan bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                  <h2 className="text-xl font-bold text-brand-navy dark:text-white mb-3">{s.titulo}</h2>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{s.descricao}</p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
           <div className="text-center">

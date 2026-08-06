@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { diferenciais } from '../data/conteudo'
 import Faq from '../components/Faq'
 import PageBanner from '../components/PageBanner'
+import ScrollReveal from '../components/ScrollReveal'
 import gestaoBanner from '../assets/Unidades/unidade12.jpg'
 
 export default function Gestao() {
@@ -17,22 +17,26 @@ export default function Gestao() {
 
       <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-4xl mx-auto">
-          <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
-            A Park Plus assume a operação completa do seu estacionamento: contratação e treinamento
-            de equipe, implantação de sistemas de controle de acesso, gestão financeira, monitoramento
-            e toda a parte operacional do dia a dia.
-          </p>
-          <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-16">
-            Com nossa expertise, você reduz custos operacionais, elimina dores de cabeça com RH e
-            garante uma operação profissional que valoriza seu empreendimento.
-          </p>
+          <ScrollReveal>
+            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+              A Park Plus assume a operação completa do seu estacionamento: contratação e treinamento
+              de equipe, implantação de sistemas de controle de acesso, gestão financeira, monitoramento
+              e toda a parte operacional do dia a dia.
+            </p>
+            <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-16">
+              Com nossa expertise, você reduz custos operacionais, elimina dores de cabeça com RH e
+              garante uma operação profissional que valoriza seu empreendimento.
+            </p>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {diferenciais.map((item) => (
-              <div key={item.id} className="border-t-4 border-brand-cyan bg-gray-50 dark:bg-slate-800 rounded-2xl p-6">
-                <h3 className="font-bold text-brand-navy dark:text-white mb-2">{item.titulo}</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">{item.descricao}</p>
-              </div>
+            {diferenciais.map((item, i) => (
+              <ScrollReveal key={item.id} delay={i} className="h-full">
+                <div className="h-full border-t-4 border-brand-cyan bg-gray-50 dark:bg-slate-800 rounded-2xl p-6">
+                  <h3 className="font-bold text-brand-navy dark:text-white mb-2">{item.titulo}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">{item.descricao}</p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
 
