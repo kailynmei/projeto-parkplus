@@ -1,20 +1,18 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { servicos } from '../data/conteudo'
+import PageBanner from '../components/PageBanner'
+import servicosBanner from '../assets/Unidades/unidade13.jpg'
 
 export default function Servicos() {
   return (
     <main className="pt-20">
-      <section className="bg-brand-navy py-20 px-6 text-center text-white">
-        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
-          className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-3">
-          O que oferecemos
-        </motion.p>
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl font-black">
-          Nossos serviços
-        </motion.h1>
-      </section>
+      <PageBanner
+        image={servicosBanner}
+        positionClass="object-[70%_center] md:object-[center_55%]"
+        eyebrow="O que oferecemos"
+        title="Nossos serviços"
+      />
 
       <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-5xl mx-auto">

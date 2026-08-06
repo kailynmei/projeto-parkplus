@@ -1,20 +1,18 @@
 import { motion } from 'framer-motion'
 import { convenios } from '../data/conteudo'
+import PageBanner from '../components/PageBanner'
+import conveniosBanner from '../assets/Unidades/unidade16.jpg'
 
 export default function Convenios() {
   return (
     <main className="pt-20">
-      <section className="bg-brand-navy py-20 px-6 text-center text-white">
-        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
-          className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-3">
-          Parceiros e descontos
-        </motion.p>
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl font-black mb-4">
-          Convênios
-        </motion.h1>
-        <p className="text-white/60 max-w-xl mx-auto">{convenios.descricao}</p>
-      </section>
+      <PageBanner
+        image={conveniosBanner}
+        positionClass="object-[center_30%] md:object-[center_50%]"
+        eyebrow="Parceiros e descontos"
+        title="Convênios"
+        subtitle={convenios.descricao}
+      />
 
       <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-4xl mx-auto">

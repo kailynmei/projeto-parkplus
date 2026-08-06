@@ -2,20 +2,18 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { diferenciais } from '../data/conteudo'
 import Faq from '../components/Faq'
+import PageBanner from '../components/PageBanner'
+import gestaoBanner from '../assets/Unidades/unidade12.jpg'
 
 export default function Gestao() {
   return (
     <main className="pt-20">
-      <section className="bg-brand-navy py-20 px-6 text-center text-white">
-        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
-          className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-3">
-          Terceirize com quem entende
-        </motion.p>
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl font-black">
-          Gestão de estacionamento
-        </motion.h1>
-      </section>
+      <PageBanner
+        image={gestaoBanner}
+        positionClass="object-[center_60%] md:object-[center_45%]"
+        eyebrow="Terceirize com quem entende"
+        title="Gestão de estacionamento"
+      />
 
       <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-4xl mx-auto">

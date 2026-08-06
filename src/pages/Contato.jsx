@@ -1,23 +1,20 @@
 import { motion } from 'framer-motion'
 import { empresa } from '../data/conteudo'
+import PageBanner from '../components/PageBanner'
+import contatoBanner from '../assets/Unidades/unidade5.jpg'
 
 export default function Contato() {
   return (
     <main className="pt-20">
-      <section className="bg-brand-navy py-20 px-6 text-center text-white">
-        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
-          className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-3">
-          Fale com a gente
-        </motion.p>
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-5xl font-black mb-4">
-          Contato
-        </motion.h1>
-      </section>
+      <PageBanner
+        image={contatoBanner}
+        positionClass="object-[35%_center] md:object-[center_50%]"
+        eyebrow="Fale com a gente"
+        title="Contato"
+      />
 
       <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Informações */}
           <div>
             <h2 className="text-xl font-bold text-brand-navy dark:text-white mb-6">Informações</h2>
             <div className="flex flex-col gap-5 text-gray-600 dark:text-gray-400">
@@ -42,7 +39,6 @@ export default function Contato() {
             </div>
           </div>
 
-          {/* Formulário */}
           <div>
             <h2 className="text-xl font-bold text-brand-navy dark:text-white mb-6">Envie uma mensagem</h2>
             <form className="flex flex-col gap-4">
