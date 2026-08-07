@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
 import { empresa } from '../data/conteudo'
 import PageBanner from '../components/PageBanner'
+import WaveBackground from '../components/WaveBackground'
 import contatoBanner from '../assets/Unidades/unidade5.jpg'
 
 export default function Contato() {
@@ -13,8 +13,9 @@ export default function Contato() {
         title="Contato"
       />
 
-      <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+      <section className="relative py-20 px-6 bg-white dark:bg-slate-950 transition-colors overflow-hidden">
+        <WaveBackground />
+        <div className="relative max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-xl font-bold text-brand-navy dark:text-white mb-6">Informações</h2>
             <div className="flex flex-col gap-5 text-gray-600 dark:text-gray-400">

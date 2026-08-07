@@ -2,6 +2,7 @@ import { empresa, estatisticas } from '../data/conteudo'
 import SomosDiferentes from '../components/SomosDiferentes'
 import PageBanner from '../components/PageBanner'
 import ScrollReveal from '../components/ScrollReveal'
+import WaveBackground from '../components/WaveBackground'
 import sobreBanner from '../assets/Unidades/unidade6.jpg'
 import escritorioImg from '../assets/Unidades/escritorio-alamedaolga.jpg'
 
@@ -17,8 +18,9 @@ export default function Sobre() {
         title="Sobre a Park Plus"
       />
 
-      <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
-        <div className="max-w-4xl mx-auto">
+      <section className="relative py-20 px-6 bg-white dark:bg-slate-950 transition-colors overflow-hidden">
+        <WaveBackground />
+        <div className="relative max-w-4xl mx-auto">
           <ScrollReveal>
             <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
               Fundada em {empresa.fundacao}, a {empresa.nome} é especializada na administração e gestão de
@@ -77,8 +79,9 @@ export default function Sobre() {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <section className="relative py-20 px-6 bg-white dark:bg-slate-950 transition-colors overflow-hidden">
+        <WaveBackground flip />
+        <div className="relative max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {estatisticas.map((item, i) => (
             <ScrollReveal key={item.label} delay={i} className="h-full">
               <div className="h-full bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 shadow-sm">

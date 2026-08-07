@@ -1,6 +1,7 @@
 import { convenios } from '../data/conteudo'
 import PageBanner from '../components/PageBanner'
 import ScrollReveal from '../components/ScrollReveal'
+import WaveBackground from '../components/WaveBackground'
 import conveniosBanner from '../assets/Unidades/unidade16.jpg'
 
 export default function Convenios() {
@@ -14,8 +15,9 @@ export default function Convenios() {
         subtitle={convenios.descricao}
       />
 
-      <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
-        <div className="max-w-4xl mx-auto">
+      <section className="relative py-20 px-6 bg-white dark:bg-slate-950 transition-colors overflow-hidden">
+        <WaveBackground />
+        <div className="relative max-w-4xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {convenios.modalidades.map((m, i) => (
               <ScrollReveal key={m.titulo} delay={i} className="h-full">

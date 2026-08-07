@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Faq from '../components/Faq'
 import PageBanner from '../components/PageBanner'
 import ScrollReveal from '../components/ScrollReveal'
+import WaveBackground from '../components/WaveBackground'
 import gestaoBanner from '../assets/Unidades/unidade12.jpg'
 
 const etapas = [
@@ -53,8 +54,9 @@ export default function Gestao() {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-gray-50 dark:bg-slate-900 transition-colors">
-        <div className="max-w-4xl mx-auto">
+      <section className="relative py-20 px-6 bg-gray-50 dark:bg-slate-900 transition-colors overflow-hidden">
+        <WaveBackground flip />
+        <div className="relative max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
               <p className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-2">O processo</p>
@@ -62,7 +64,7 @@ export default function Gestao() {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-14">
             {etapas.map((etapa, i) => (
               <ScrollReveal key={etapa.numero} delay={i} className="h-full">
                 <div className="h-full bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm">
@@ -73,15 +75,13 @@ export default function Gestao() {
               </ScrollReveal>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section className="py-16 px-6 bg-white dark:bg-slate-950 transition-colors">
-        <div className="max-w-4xl mx-auto text-center">
-          <Link to="/contato"
-            className="bg-brand-cyan text-brand-navy font-bold px-8 py-3.5 rounded-full hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide">
-            Solicitar Proposta Comercial
-          </Link>
+          <ScrollReveal className="text-center">
+            <Link to="/contato"
+              className="bg-brand-cyan text-brand-navy font-bold px-8 py-3.5 rounded-full hover:bg-brand-cyan-dark transition-colors text-sm uppercase tracking-wide">
+              Solicitar Proposta Comercial
+            </Link>
+          </ScrollReveal>
         </div>
       </section>
 

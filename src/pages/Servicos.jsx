@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { servicos } from '../data/conteudo'
 import PageBanner from '../components/PageBanner'
 import ScrollReveal from '../components/ScrollReveal'
+import WaveBackground from '../components/WaveBackground'
 import servicosBanner from '../assets/Unidades/unidade13.jpg'
 
 export default function Servicos() {
@@ -14,8 +15,9 @@ export default function Servicos() {
         title="Nossos serviços"
       />
 
-      <section className="py-20 px-6 bg-white dark:bg-slate-950 transition-colors">
-        <div className="max-w-5xl mx-auto">
+      <section className="relative py-20 px-6 bg-white dark:bg-slate-950 transition-colors overflow-hidden">
+        <WaveBackground />
+        <div className="relative max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {servicos.map((s, i) => (
               <ScrollReveal key={s.id} delay={i} className="h-full">
