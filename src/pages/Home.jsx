@@ -7,13 +7,29 @@ import unidade1 from '../assets/Unidades/unidade1.jpg'
 import unidade2 from '../assets/Unidades/unidade2.jpg'
 import unidade3 from '../assets/Unidades/unidade3.jpg'
 import unidade4 from '../assets/Unidades/unidade4.jpg'
+import unidade8 from '../assets/Unidades/unidade8.jpg'
+import unidade10 from '../assets/Unidades/unidade16.jpg'
+import unidade11 from '../assets/Unidades/unidade11.jpg'
+import unidade15 from '../assets/Unidades/unidade15.jpg'
+import unidade17 from '../assets/Unidades/unidade17.jpg'
 import destaque1 from '../assets/Unidades/unidade7.jpg'
 import destaque2 from '../assets/Unidades/unidade9.jpg'
 import destaque3 from '../assets/Unidades/unidade14.jpg'
 import VideoSection from '../components/VideoSection'
 import WaveBackground from '../components/WaveBackground'
 
-const heroImages = [heroImg, unidade1, unidade2, unidade3, unidade4]
+const heroImages = [
+  heroImg,
+  unidade1,
+  unidade2,
+  unidade3,
+  unidade4,
+  unidade8,
+  unidade10,
+  unidade11,
+  unidade15,
+  unidade17,
+]
 
 const unidadesDestaque = [
   { unidadeId: 4, nome: 'Empresarial Perdizes', bairro: 'Perdizes', imagem: destaque1 },
@@ -175,7 +191,7 @@ export default function Home() {
     <main>
       <section className="relative">
         <ParallaxSlideshow images={heroImages} />
-        <div className="absolute inset-0 bg-brand-navy/75" />
+        <div className="absolute inset-0 bg-brand-navy/60" />
 
         <div className="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-screen flex flex-col items-center justify-center text-white text-center px-6 pt-24">
           <div className="max-w-4xl mx-auto">
