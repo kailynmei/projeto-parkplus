@@ -10,16 +10,15 @@ import unidade4 from '../assets/Unidades/unidade4.jpg'
 import destaque1 from '../assets/Unidades/unidade7.jpg'
 import destaque2 from '../assets/Unidades/unidade9.jpg'
 import destaque3 from '../assets/Unidades/unidade14.jpg'
-import destaque4 from '../assets/Unidades/unidade16.jpg'
 import VideoSection from '../components/VideoSection'
+import WaveBackground from '../components/WaveBackground'
 
 const heroImages = [heroImg, unidade1, unidade2, unidade3, unidade4]
 
 const unidadesDestaque = [
-  { nome: 'Empresarial Perdizes', bairro: 'Perdizes', imagem: destaque1 },
-  { nome: 'Heleno Tower', bairro: 'Perdizes', imagem: destaque2 },
-  { nome: 'The Point Office Park', bairro: 'Alto de Pinheiros', imagem: destaque3 },
-  { nome: 'TPA Granja Viana', bairro: 'Cotia', imagem: destaque4 },
+  { unidadeId: 4, nome: 'Empresarial Perdizes', bairro: 'Perdizes', imagem: destaque1 },
+  { unidadeId: 2, nome: 'Heleno Tower', bairro: 'Perdizes', imagem: destaque2 },
+  { unidadeId: 16, nome: 'The Point Office Park', bairro: 'Granja Viana', imagem: destaque3 },
 ]
 
 const fadeUp = {
@@ -140,11 +139,13 @@ function ParallaxSlideshow({ images }) {
   )
 }
 
-function UnitShowcaseCard({ nome, bairro, imagem, i }) {
+function UnitShowcaseCard({ nome, bairro, imagem, unidadeId, i }) {
+  const to = unidadeId ? `/unidades?destaque=${unidadeId}` : '/unidades'
+
   return (
     <ScrollReveal delay={i} className="h-full">
       <Link
-        to="/unidades"
+        to={to}
         className="group relative block h-64 sm:h-72 rounded-2xl overflow-hidden shadow-sm"
       >
         <img
@@ -253,8 +254,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 px-6 bg-brand-navy">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative py-24 px-6 bg-brand-navy overflow-hidden">
+        <WaveBackground tone="onNavy" />
+        <div className="relative max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-16">
               <p className="text-brand-cyan font-semibold text-xs uppercase tracking-widest mb-2">Por que a Park Plus?</p>
@@ -284,9 +286,16 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
             {unidadesDestaque.map((u, i) => (
-              <UnitShowcaseCard key={u.nome} nome={u.nome} bairro={u.bairro} imagem={u.imagem} i={i} />
+              <UnitShowcaseCard
+                key={u.nome}
+                nome={u.nome}
+                bairro={u.bairro}
+                imagem={u.imagem}
+                unidadeId={u.unidadeId}
+                i={i}
+              />
             ))}
           </div>
 
@@ -303,8 +312,9 @@ export default function Home() {
 
       <VideoSection />
 
-      <section className="py-24 px-6 bg-white dark:bg-slate-950 transition-colors">
-        <ScrollReveal>
+      <section className="relative py-24 px-6 bg-white dark:bg-slate-950 transition-colors overflow-hidden">
+        <WaveBackground flip />
+        <ScrollReveal className="relative">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-black text-brand-navy dark:text-white mb-4">
               Quer terceirizar seu estacionamento?

@@ -4,7 +4,6 @@ import Logo from './Logo'
 import { useTheme } from '../context/ThemeContext'
 
 const navLinks = [
-  { to: '/', label: 'Home' },
   { to: '/sobre', label: 'Sobre' },
   { to: '/servicos', label: 'Serviços' },
   { to: '/convenios', label: 'Convênios' },
@@ -54,8 +53,8 @@ export default function Header() {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}>
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
-        <Link to="/" onClick={() => setMenuAberto(false)}>
+      <div className="w-full px-6 lg:px-10 flex items-center justify-between gap-6 h-20">
+        <Link to="/" onClick={() => setMenuAberto(false)} className="shrink-0">
           <Logo className="h-16 w-auto" onDark={dark} />
         </Link>
 

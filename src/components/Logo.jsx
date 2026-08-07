@@ -6,7 +6,7 @@ export default function Logo({ className = 'h-14 w-auto', onDark = true }) {
     <img
       src={onDark ? logoDark : logoLight}
       alt="Park Plus Estacionamentos"
-      className={className}
+      className={`shrink-0 ${className}`}
     />
   )
 }
