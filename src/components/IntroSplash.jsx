@@ -1,61 +1,57 @@
-// src/components/IntroSplash.jsx
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import logoLight from '../assets/logo-light.png'; // logo clara, mesma usada no onDark do Logo.jsx
+import { useCallback, useEffect, useState } from 'react'
 
-const SPLASH_SESSION_KEY = 'pp_intro_shown';
+const DURACAO = 4900
+const FADE = 600
 
 export default function IntroSplash({ onFinish }) {
-  const [visible, setVisible] = useState(true);
-  const prefersReducedMotion = useReducedMotion();
+  const [saindo, setSaindo] = useState(false)
+
+  const encerrar = useCallback(() => setSaindo(true), [])
 
   useEffect(() => {
-    // Marca a sessão logo de cara, assim mesmo que o usuário
-    // recarregue no meio da animação, ela não repete
-    sessionStorage.setItem(SPLASH_SESSION_KEY, 'true');
+    if (saindo) return
+    const reduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const t = setTimeout(encerrar, reduzido ? 1000 : DURACAO)
+    return () => clearTimeout(t)
+  }, [saindo, encerrar])
 
-    // Trava o scroll do body enquanto a splash está visível
-    document.body.style.overflow = 'hidden';
+  useEffect(() => {
+    if (!saindo) return
+    const t = setTimeout(() => onFinish(), FADE)
+    return () => clearTimeout(t)
+  }, [saindo, onFinish])
 
-    const delay = prefersReducedMotion ? 400 : 1900;
-    const timeout = setTimeout(() => setVisible(false), delay);
+  useEffect(() => {
+    const anterior = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = anterior
+    }
+  }, [])
 
-    return () => clearTimeout(timeout);
-  }, [prefersReducedMotion]);
-
-  const handleSkip = () => setVisible(false);
+  useEffect(() => {
+    const aoTeclar = (e) => {
+      if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') encerrar()
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [encerrar])
 
   return (
-    <AnimatePresence
-      onExitComplete={() => {
-        document.body.style.overflow = '';
-        onFinish();
-      }}
+    <div
+      onClick={encerrar}
+      className={`fixed inset-0 z-[9999] flex cursor-pointer items-center justify-center bg-white transition-opacity duration-[600ms] ease-out ${
+        saindo ? 'opacity-0' : 'opacity-100'
+      }`}
     >
-      {visible && (
-        <motion.div
-          key="intro-splash"
-        //   className="fixed inset-0 z-[999] flex items-center justify-center bg-[#0A1628] cursor-pointer"
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-slate-50 cursor-pointer"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: 'easeInOut' }}
-          onClick={handleSkip}
-        >
-          <motion.img
-            src={logoLight}
-            alt="Park Plus Estacionamentos"
-            className="w-40 sm:w-52 md:w-60"
-            initial={
-              prefersReducedMotion
-                ? { opacity: 1 }
-                : { opacity: 0, scale: 0.85 }
-            }
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
+      <img
+        src="/parkplus-intro.svg"
+        alt="Park Plus Estacionamentos"
+        draggable="false"
+        className={`w-[min(62vw,62vh,340px)] select-none transition-transform duration-[600ms] ease-out ${
+          saindo ? 'scale-[1.06]' : 'scale-100'
+        }`}
+      />
+    </div>
+  )
 }

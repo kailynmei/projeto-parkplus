@@ -60,9 +60,14 @@ export default function App() {
     () => !sessionStorage.getItem('pp_intro_shown')
   )
 
+  const finalizarIntro = () => {
+    sessionStorage.setItem('pp_intro_shown', '1')
+    setShowIntro(false)
+  }
+
   return (
     <ThemeContext.Provider value={{ dark, toggle }}>
-      {showIntro && <IntroSplash onFinish={() => setShowIntro(false)} />}
+      {showIntro && <IntroSplash onFinish={finalizarIntro} />}
 
       <BrowserRouter>
         <ScrollToTop />
