@@ -7,10 +7,10 @@ import MapaUnidades from '../components/MapaUnidades'
 import unidadesBanner from '../assets/Unidades/unidade3.jpg'
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 16 },
   visible: (i) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.5, delay: i * 0.06, ease: 'easeOut' },
+    transition: { duration: 0.4, delay: i * 0.06, ease: 'easeOut' },
   }),
 }
 
@@ -90,11 +90,12 @@ export default function Unidades() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, margin: '-60px' }}
+                whileHover={{ y: -4 }}
                 custom={i}
                 variants={fadeUp}
-                className={`p-6 hover:-translate-y-1 transition-all duration-700 ${
+                className={`p-6 transition-shadow duration-500 ${
                   highlightedId === u.id
-                    ? 'scale-[1.04] brightness-90 shadow-lg'
+                    ? 'brightness-90 shadow-lg'
                     : ''
                 }`}
               >

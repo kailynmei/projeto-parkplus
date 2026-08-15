@@ -3,7 +3,7 @@ export default function Card({ as: Component = 'div', className = '', interactiv
 
   return (
     <Component
-      className={`group block rounded-2xl bg-gray-50 dark:bg-slate-800 border-t-4 border-brand-cyan transition-all duration-300 ${hoverRing} ${className}`}
+      className={`group block rounded-2xl bg-gray-50 dark:bg-slate-800 border-t-4 border-brand-cyan transition-shadow duration-300 ${hoverRing} ${className}`}
       {...props}
     >
       {children}
